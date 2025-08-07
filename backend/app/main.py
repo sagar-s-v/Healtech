@@ -1,29 +1,39 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from starlette.responses import FileResponse
+import os
 from app.api import endpoints
 from app.db.database import engine, Base
 
-# This line creates the database tables based on your models.
+# Create DB tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Intelligent Query-Retrieval System API")
 
-# This is the crucial CORS configuration block.
-# It lists the frontend origins that are allowed to make requests to this backend.
-origins = ["http://localhost:3000",
-           "https://healtech-app.onrender.com"]
+origins = [
+    "http://localhost:3000",
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,       # Allow specific origins
-    allow_credentials=True,      # Allow cookies (if needed in the future)
-    allow_methods=["*"],         # Allow all HTTP methods (GET, POST, etc.)
-    allow_headers=["*"],         # Allow all headers
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# This line includes all the API routes from endpoints.py
 app.include_router(endpoints.router, prefix="/api/v1", tags=["query"])
 
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to the Intelligent Query-Retrieval System API"}
+# --- NEW SECTION TO SERVE REACT FRONTEND ---
+
+# Define the path to the frontend build directory
+build_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "build"))
+
+# Mount the static files (JS, CSS, etc.) from the React build folder
+app.mount("/static", StaticFiles(directory=os.path.join(build_dir, "static")), name="static")
+
+# A catch-all route to serve the index.html for any other path
+@app.get("/{full_path:path}")
+async def serve_react_app(full_path: str):
+    return FileResponse(os.path.join(build_dir, "index.html"))
