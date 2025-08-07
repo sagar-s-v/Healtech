@@ -6,7 +6,7 @@ python-dotenv
 pydantic
 pydantic-settings
 google-generativeai
-pinecone-client
+pinecone
 sentence-transformers
 langchain
 pypdf
