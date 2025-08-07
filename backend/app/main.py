@@ -10,11 +10,12 @@ app = FastAPI(title="Intelligent Query-Retrieval System API")
 
 # This is the crucial CORS configuration block.
 # It lists the frontend origins that are allowed to make requests to this backend.
-
+origins = ["http://localhost:3000",
+           "https://healtech-app.onrender.com"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],       # Allow specific origins
+    allow_origins=origins,       # Allow specific origins
     allow_credentials=True,      # Allow cookies (if needed in the future)
     allow_methods=["*"],         # Allow all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],         # Allow all headers
