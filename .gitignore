@@ -1,0 +1,67 @@
+# --- General ---
+
+# Environment variables
+# IMPORTANT: Never commit your secret keys!
+.env
+.env.*
+!.env.example
+
+# IDE and editor configuration files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+._*
+
+
+# --- Python / FastAPI Backend ---
+
+# Virtual environment
+venv/
+env/
+*/venv/
+*/env/
+
+# Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# User-uploaded files (should not be in version control)
+uploads/
+*/uploads/
+
+# Test and coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+
+# --- Node.js / React Frontend ---
+
+# Node.js dependencies
+node_modules/
+*/node_modules/
+
+# Build output folder
+build/
+dist/
+*/build/
+*/dist/
+
+# Log files
+npm-debug.log*
+yarn-error.log
+yarn-debug.log
+
+# Other
+.pnp
+.pnp.js
+coverage/

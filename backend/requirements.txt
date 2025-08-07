@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+python-dotenv
+pydantic
+pydantic-settings
+google-generativeai
+pinecone-client
+sentence-transformers
+langchain
+pypdf
+python-docx
+pyzmail36
+python-multipart
