@@ -1,3 +1,7 @@
+"""
+This is the main file.
+"""
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -6,7 +10,7 @@ import os
 from app.api import endpoints
 from app.db.database import engine, Base
 
-# Create DB tables
+# Create DB tables.
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Intelligent Query-Retrieval System API")
